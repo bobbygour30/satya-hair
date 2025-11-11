@@ -1,44 +1,22 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-import HeroSection from './components/HeroSection'
-import ShowCase from './components/ShowCase'
-import LogoSlider from './components/LogoSlider'
-import HIFUFeatureComponent from './components/HIFUFeatureComponent'
-import ProtocolPrecisionSection from './components/ProtocolPrecisionSection'
-import ScienceBehindHIFU from './components/ScienceBehindHIFU'
-import HIFUStepByStep from './components/HIFUStepByStep'
-import RibbonStrip from './components/RibbonStrip'
-import RealPeopleRealLift from './components/RealPeopleRealLift'
-import AftercareSection from './components/AftercareSection'
-import DermatologistSection from './components/DermatologistSection'
-import HifuFAQSection from './components/HifuFAQSection'
-// import HifuConsultationForm from './components/HifuConsultationForm'
-import HifuMediaShowcase from './components/HifuMediaShowcase'
-import SatyaFacilitySection from './components/SatyaFacilitySection'
-import Footer from './components/Footer'
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import SyntheticHTLP1 from './pages/SyntheticHTLP1';
+import HomePage from './pages/HomePage'; // optional, if you still need old page
 
-const App = () => {
-  return (
-    <div>
-      <Navbar />
-      <HeroSection />
-      <ShowCase />
-      <ScienceBehindHIFU />
-      <DermatologistSection />
-      <LogoSlider />
-      <HIFUFeatureComponent />
-      <HIFUStepByStep />
-      <ProtocolPrecisionSection />
-      <RibbonStrip />
-      <RealPeopleRealLift />
-      <AftercareSection />
-      <SatyaFacilitySection />
-      {/* <HifuConsultationForm /> */}
-      <HifuMediaShowcase />
-      <HifuFAQSection />
-      <Footer />
-    </div>
-  )
-}
+const App = () => (
+  <Routes>
+    {/* 1. Root → redirect to /synthethic-ht-lp1 */}
+    <Route path="/" element={<Navigate to="/synthethic-ht-lp1" replace />} />
 
-export default App
+    {/* 2. Your main landing page */}
+    <Route path="/synthethic-ht-lp1" element={<SyntheticHTLP1 />} />
+
+    {/* Optional: Keep old HIFU page */}
+    <Route path="/hifu-treatment-lp1" element={<HomePage />} />
+
+    {/* Optional: Catch-all fallback */}
+    <Route path="*" element={<Navigate to="/synthethic-ht-lp1" replace />} />
+  </Routes>
+);
+
+export default App;
