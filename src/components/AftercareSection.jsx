@@ -21,9 +21,9 @@ export default function AftercareSection() {
   ];
 
   const images = [
-    assets.vindu,
-    assets.slider,
-    assets.slider1,
+    assets.banner11,
+    assets.banner10,
+    assets.banner9,
   ];
 
   // Responsive slider settings

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import assets from '../assets/assets';
 
 export default function ProtocolPrecisionSection({
-  imageSrc = assets.machine,
+  imageSrc = assets.banner9,
 }) {
   const container = {
     hidden: { opacity: 0, y: 12 },
@@ -87,7 +87,7 @@ export default function ProtocolPrecisionSection({
             <motion.img
               src={imageSrc}
               alt="Ultrasound device in clinical setting"
-              className="w-full h-80 md:h-112 object-cover"
+              className="w-full h-80 md:h-112 object-fill"
               whileHover={{ scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 160 }}
             />

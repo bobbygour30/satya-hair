@@ -17,6 +17,9 @@ import build5 from './4.png';
 import build6 from './5.png';
 import build7 from './6.png';
 import build8 from './7.png';
+import banner9 from './9.png';
+import banner10 from './10.png';
+import banner11 from './12.png';
 const assets = {
     logo,
     place,
@@ -36,7 +39,10 @@ const assets = {
     build5,
     build6,
     build7,
-    build8
+    build8,
+    banner9,
+    banner10,
+    banner11
 };
 
 export default assets;
