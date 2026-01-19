@@ -11,19 +11,13 @@ const HeroSection = () => {
     <section className="relative flex flex-col sm:flex-row items-start sm:items-center justify-start w-full min-h-[90vh] sm:min-h-screen overflow-hidden sm:mt-[90px]">
       {/* === Backgrounds and Overlays === */}
       <div
-        className="absolute inset-0 bg-cover bg-center hidden sm:block"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
             `url('${assets.banner}')`,
         }}
       />
-      <div
-        className="absolute inset-0 bg-cover bg-top sm:hidden"
-        style={{
-          backgroundImage:
-            `url('${assets.bannermobile}')`,
-        }}
-      />
+      
       <div className="absolute inset-0 bg-linear-to-b from-[#2B333C]/70 via-[#2B333C]/60 to-[#9E4A47]/40"></div>
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] sm:w-[60vw] sm:h-[60vw] bg-[radial-gradient(circle,rgba(245,231,209,0.25)_0%,transparent_70%)] blur-3xl pointer-events-none"></div>
 

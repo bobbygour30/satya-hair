@@ -1,6 +1,6 @@
 import logo from './logo.png';
 import place from './place.png';
-import banner from './banner.jpg';
+import banner from './banner.webp';
 import vindu from './vindu.jpg';
 import slider from './slider.JPG';
 import slider1 from './slider1.JPG';

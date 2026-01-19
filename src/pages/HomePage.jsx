@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import ShowCase from '../components/ShowCase';
-import LogoSlider from '../components/LogoSlider';
+// import LogoSlider from '../components/LogoSlider';
 import HIFUFeatureComponent from '../components/HIFUFeatureComponent';
 import ProtocolPrecisionSection from '../components/ProtocolPrecisionSection';
 import ScienceBehindHIFU from '../components/ScienceBehindHIFU';
@@ -24,7 +24,7 @@ const HomePage = () => {
       <ShowCase />
       <ScienceBehindHIFU />
       <DermatologistSection />
-      <LogoSlider />
+      {/* <LogoSlider /> */}
       <HIFUFeatureComponent />
       <HIFUStepByStep />
       <ProtocolPrecisionSection />
