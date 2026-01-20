@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import assets from '../assets/assets';
 
 export default function ProtocolPrecisionSection({
-  imageSrc = assets.banner9,
+  imageSrc = assets.bed,
 }) {
   const container = {
     hidden: { opacity: 0, y: 12 },

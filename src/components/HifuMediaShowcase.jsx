@@ -1,58 +1,42 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Instagram, Youtube, Play } from 'lucide-react';
+import assets from '../assets/assets'; // adjust path if needed
 
-// Helper: Extract YouTube video ID from any valid YouTube URL
+// Helper: Extract YouTube ID
 const getYouTubeId = (url) => {
   try {
     const urlObj = new URL(url);
-    let id = '';
 
-    // Standard video: youtube.com/watch?v=ID
+    if (urlObj.hostname.includes('youtube.com') && urlObj.pathname.includes('/shorts/')) {
+      return urlObj.pathname.split('/shorts/')[1].split('?')[0];
+    }
     if (urlObj.hostname.includes('youtube.com') && urlObj.searchParams.has('v')) {
-      id = urlObj.searchParams.get('v');
+      return urlObj.searchParams.get('v');
     }
-    // Shorts: youtube.com/shorts/ID
-    else if (urlObj.hostname.includes('youtube.com') && urlObj.pathname.includes('/shorts/')) {
-      id = urlObj.pathname.split('/shorts/')[1].split('?')[0];
+    if (urlObj.hostname.includes('youtu.be')) {
+      return urlObj.pathname.slice(1);
     }
-    // youtu.be/ID
-    else if (urlObj.hostname.includes('youtu.be')) {
-      id = urlObj.pathname.slice(1).split('?')[0];
-    }
-
-    return id || null;
-  } catch {
-    return null;
-  }
-};
-
-// Helper: Generate embed URL
-const getEmbedUrl = (url) => {
-  const id = getYouTubeId(url);
-  return id ? `https://www.youtube.com/embed/${id}` : null;
+  } catch {}
+  return null;
 };
 
 export default function HifuMediaShowcase() {
-  // Use FULL YouTube URLs — no need to extract IDs!
-
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const shorts = [
     {
-      url: 'https://www.youtube.com/shorts/ClBYxTLC23w', // Replace with real Shorts
-      title: 'Jawline Lift Before & After',
-      description: 'See dramatic contouring results in 60 seconds.',
+      url: 'https://www.youtube.com/shorts/gNDIxX_tVMU',
+      thumbnail: assets.thumbnail3,
     },
     {
-      url: 'https://www.youtube.com/shorts/bo7RgLyn820',
-      title: 'Neck Tightening Tips',
-      description: 'Post-HIFU care for lasting glow.',
+      url: 'https://www.youtube.com/shorts/0SC4xifYpzc',
+      thumbnail: assets.thumbnail2,
     },
     {
-      url: 'https://www.youtube.com/shorts/7x7GhR8S_v0',
-      title: 'Patient Reaction Live',
-      description: 'Real emotions during HIFU session.',
+      url: 'https://www.youtube.com/shorts/Qcb6yreD2MM',
+      thumbnail: assets.thumbnail1,
     },
   ];
 
@@ -94,8 +78,9 @@ export default function HifuMediaShowcase() {
           <Instagram className="text-[#9E4A47]" size={20} />
           <span className="font-medium text-[#2B333C]">Instagram</span>
         </a>
+
         <a
-          href="https://www.youtube.com/watch?v=MWObPqvRRgk&list=TLGGo33LTfPNCkEwNDExMjAyNQ&t=2s"
+          href="https://www.youtube.com/@satyaskinandhair"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-5 py-3 rounded-full border border-[#DFDFDD] bg-[#FFF8EF] hover:bg-[#FCEBDE] transition-all shadow-sm"
@@ -105,10 +90,7 @@ export default function HifuMediaShowcase() {
         </a>
       </motion.div>
 
-    
-      
-
-      {/* YouTube Shorts Row */}
+      {/* YouTube Shorts */}
       <div className="relative z-10 max-w-6xl mx-auto">
         <motion.h3
           initial={{ opacity: 0, x: -20 }}
@@ -123,56 +105,63 @@ export default function HifuMediaShowcase() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {shorts.map((short, idx) => {
-            const embedUrl = getEmbedUrl(short.url);
+            const videoId = getYouTubeId(short.url);
+
             return (
-              <motion.a
+              <motion.div
                 key={idx}
-                href={short.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
-                className="group block bg-white rounded-2xl overflow-hidden shadow-[0_6px_20px_rgba(0,0,0,0.06)] transition-all duration-300"
+                className="bg-white rounded-2xl overflow-hidden shadow-[0_6px_20px_rgba(0,0,0,0.06)]"
               >
                 <div className="relative aspect-[9/16] bg-black overflow-hidden">
-                  {embedUrl ? (
+                  {activeIndex === idx && videoId ? (
                     <iframe
-                      src={embedUrl}
-                      title={short.title}
-                      className="w-full h-full scale-105 group-hover:scale-100 transition-transform duration-700"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&playsinline=1`}
+                      className="w-full h-full"
+                      allow="autoplay; encrypted-media; picture-in-picture"
                       allowFullScreen
-                      loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <Youtube className="text-gray-400" size={40} />
-                    </div>
+                    <>
+                      <img
+                        src={short.thumbnail}
+                        alt="YouTube Short Thumbnail"
+                        className="w-full h-full object-cover"
+                      />
+
+                      <div className="absolute inset-0 bg-black/40" />
+
+                      <button
+                        onClick={() => setActiveIndex(idx)}
+                        className="absolute inset-0 flex items-center justify-center"
+                      >
+                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg hover:scale-110 transition">
+                          <Play className="text-[#9E4A47] ml-1" size={28} />
+                        </div>
+                      </button>
+
+                      <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+                        SHORT
+                      </div>
+                    </>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    
-                  </div>
-                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full font-medium">
-                    SHORT
-                  </div>
                 </div>
-              </motion.a>
+              </motion.div>
             );
           })}
         </div>
       </div>
 
-      {/* CTA */}
+      {/* CTA — RESTORED ✅ */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.4 }}
         viewport={{ once: true }}
-        className="text-center mt-16"
+        className="text-center mt-16 relative z-10"
       >
         <a
           href="https://www.youtube.com/@satyaskinandhair"
