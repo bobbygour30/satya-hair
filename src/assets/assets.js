@@ -24,7 +24,11 @@ import bed from './bed.webp';
 import thumbnail1 from './thumbnail (1).jpg';
 import thumbnail2 from './thumbnail (2).jpg';
 import thumbnail3 from './thumbnail (3).jpg';
-
+import arun from './Arun Kumar.jpg';
+import emran from './Emran Taj.jpg';
+import srijni from './Srijni Paul.jpg';
+import patient from './patient.jpg';
+import patient1 from './patient1.jpg';
 const assets = {
     logo,
     place,
@@ -51,7 +55,12 @@ const assets = {
     bed,
     thumbnail1,
     thumbnail2,
-    thumbnail3
+    thumbnail3,
+    arun,
+    emran,
+    srijni,
+    patient,
+    patient1
 };
 
 export default assets;
