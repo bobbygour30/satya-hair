@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 
-// Use basename ONLY in production
-const basename =
-  import.meta.env.PROD ? '/synthethic-ht-lp1' : '/'
+const basename = import.meta.env.VITE_ROUTER_BASE || '/'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
