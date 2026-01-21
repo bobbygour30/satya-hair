@@ -26,7 +26,7 @@ import thumbnail2 from './thumbnail (2).jpg';
 import thumbnail3 from './thumbnail (3).jpg';
 import arun from './Arun-Kumar.jpg';
 import emran from './Emran-Taj.jpg';
-import srijni from './srijni-Paul.jpg';
+import srijni from './srijni-paul.jpg';
 import patient from './patient.jpg';
 import patient1 from './patient1.jpg';
 const assets = {
